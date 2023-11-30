@@ -1,4 +1,13 @@
+#!/usr/bin/python3
+"""
+0. Pascal's Triangle
+"""
+
+
 def pascal_triangle(n):
+    """
+    function that returns a lits of integers
+    """
     if n <= 0:
         return []
     triangle = []
