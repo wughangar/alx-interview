@@ -14,7 +14,7 @@ def parse_line(line):
     parts = line.split()
     if len(parts) >= 7 and parts[5].isdigit():
         return {
-                'status_code': int(parts[5])
+                'status_code': int(parts[5]),
                 'file_size': int(parts[6])
                 }
         return None
