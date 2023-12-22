@@ -8,6 +8,9 @@ import sys
 
 
 def parse_line(line):
+    """
+    function that parses the lines
+    """
     parts = line.split()
     if len(parts) >= 7 and parts[5].isdigit():
         return {
@@ -18,12 +21,18 @@ def parse_line(line):
 
 
 def print_statistics(total_size, status_counts):
+    """
+    fucntion that prints the statistics
+    """
     print(f"Total file size: {total_size}")
     for code in sorted(status_counts.keys()):
         print(f"{code}: {status_counts[code]}")
 
 
 def process_lines():
+    """
+    function that processes the lines
+    """
     total_size = 0
     status_counts = defaultdict(int)
     lines_processed = 0
