@@ -3,7 +3,6 @@
 const request = require('request');
 const providedFilmId = process.argv[2];
 const filmApiUrl = `https://swapi-api.alx-tools.com/api/films/${providedFilmId}`;
-const characterApiUrl;
 
 request(filmApiUrl, async (filmError, filmResponse, filmBody) => {
   if (filmError) {
@@ -13,7 +12,7 @@ request(filmApiUrl, async (filmError, filmResponse, filmBody) => {
 
   const characters = JSON.parse(filmBody).characters;
 
-  for (characterApiUrl of characters) {
+  for (const characterApiUrl of characters) {
     await new Promise((resolve, reject) => {
       request(characterApiUrl, (characterError, characterResponse, characterBody) => {
         if (characterError) {
