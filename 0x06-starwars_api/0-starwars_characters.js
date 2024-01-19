@@ -1,39 +1,22 @@
 #!/usr/bin/node
 
 const request = require('request');
+const providedFilmId = process.argv[2];
+const filmApiUrl = `https://swapi-api.hbtn.io/api/films/${providedFilmId}`;
 
-function getCharacters(movieId) {
-	const url = `https://swapi-api.alx-tools.com/films/${movieId}/`;
-	request(url, { json: true }, (error, response, body) => {
-		if (error) {
-			console.error('Error fetching movie data:', error);
-			return;
-		}
-	if (response.statusCode !== 200) {
-		console.error(`Unexpected status code: ${response.statusCode}`);
-		return;
-	}
-
-	const characters = body.characters;
-	characters.forEach(characterURL => {
-		request(characterURL, { json: true }, (charError, charResponse, charBody) => {
-		if (charError) {
-			console.error('Error fetching character data:', charError)
-			return;
+request(filmApiUrl, async (filmError, filmResponse, filmBody) => {
+  if (filmError) {
+    console.log(filmError);
+  }
+  for (const characterApiUrl of JSON.parse(filmBody).characters) {
+    await new Promise((resolve, reject) => {
+      request(characterApiUrl, (characterError, characterResponse, characterBody) => {
+        if (characterError) {
+          reject(characterError);
         }
-		if (charResponse.statusCode !== 200) {
-			console.error(`Unexpected status code for character: ${charResponse.statusCode}`);
-			return;
-		}
-		console.log('Character:', charBosy.name);
-		});
-	});
-	});
-}
-
-const movieId = process.argv[2];
-if (!movieId) {
-	console.error('Please provide a Movie ID as a command-line argument.');
-} else {
-	getCharacters(movieId);
-}
+        console.log(JSON.parse(characterBody).name);
+        resolve();
+      });
+    });
+  }
+});
