@@ -3,7 +3,7 @@
 const request = require('request');
 const providedFilmId = process.argv[2];
 const filmApiUrl = `https://swapi-api.alx-tools.com/api/films/${providedFilmId}`;
-let characterApiUrl;
+const characterApiUrl;
 
 request(filmApiUrl, async (filmError, filmResponse, filmBody) => {
   if (filmError) {
