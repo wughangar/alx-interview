@@ -4,6 +4,7 @@
 0. Prime Game
 """
 
+
 def isWinner(x, nums):
     def sieve(n):
         primes = []
