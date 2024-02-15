@@ -6,7 +6,13 @@
 
 
 def isWinner(x, nums):
+    """
+    function that determines who is the winner
+    """
     def sieve(n):
+        """
+        function that determines the prime numbers
+        """
         primes = []
         sieve = [True] * (n + 1)
         sieve[0] = sieve[1] = False
@@ -18,6 +24,9 @@ def isWinner(x, nums):
         return primes
 
     def winner(n):
+        """
+        function that returns wo is winner
+        """
         if n == 1:
             return "Ben"
         primes = sieve(n)
